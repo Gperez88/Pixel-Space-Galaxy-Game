@@ -1,0 +1,355 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/actors/enemy/enemy.gd" type="Script" id=1]
+[ext_resource path="res://src/actors/enemy/laser/laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/enemy-small.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/enemy-medium.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/enemy-big.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/explosion.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "big"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("big_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("medium_sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("small_sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("big_sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.001, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("big_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("medium_sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("small_sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("explosion_sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "medium"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("big_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("medium_sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("small_sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("medium_sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("big_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("medium_sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("small_sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("small_sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 8.95565
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 0.792969, 0.545473, 0.231699, 1, 1, 0.351562, 0, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+angular_velocity = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.2
+scale = 2.5
+scale_random = 0.5
+color_ramp = SubResource( 7 )
+
+[node name="Enemy" type="RigidBody2D"]
+collision_layer = 0
+gravity_scale = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+laser = ExtResource( 2 )
+
+[node name="sprite" type="Sprite" parent="."]
+
+[node name="small_sprite" type="Sprite" parent="sprite"]
+visible = false
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="medium_sprite" type="Sprite" parent="sprite"]
+visible = false
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="big_sprite" type="Sprite" parent="sprite"]
+visible = false
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="explosion_sprite" type="Sprite" parent="sprite"]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 6 )
+hframes = 5
+frame = 4
+
+[node name="animation" type="AnimationPlayer" parent="sprite"]
+anims/big = SubResource( 1 )
+anims/explosion = SubResource( 2 )
+anims/medium = SubResource( 3 )
+anims/small = SubResource( 4 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0722275, 4.55028 )
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 5 )
+
+[node name="visibility_notifier" type="VisibilityNotifier2D" parent="."]
+
+[node name="explosion_particle" type="Particles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 8 )
+
+[node name="laser_timer" type="Timer" parent="."]
+autostart = true
+[connection signal="destroyed" from="." to="." method="_on_Enemy_destroyed"]
+[connection signal="animation_finished" from="sprite/animation" to="." method="_on_animation_animation_finished"]
+[connection signal="screen_exited" from="visibility_notifier" to="." method="_on_visibility_notifier_screen_exited"]
+[connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]
