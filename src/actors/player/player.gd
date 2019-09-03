@@ -9,6 +9,8 @@ signal destroyed
 export (int) var velocity
 
 var armor = 4 setget set_armor
+var laser_up = 1
+var is_laser_updated = false setget set_is_laser_updated
 var move = Vector2()
 var bound
 
@@ -45,7 +47,23 @@ func _input(event):
 		process_animation()
 
 func _on_laser_timer_timeout():
-	create_laser()
+	var x = 10
+	
+	for count in laser_up-1:
+		var laser = create_laser()
+		match(count):
+			0:
+				x = 0
+			1:
+				x = -10
+			2:
+				x = 10
+			3:
+				x = 20
+			4:
+				x = -20
+		
+		laser.velocity.x = x
 
 func _on_Player_destroyed():
 	create_explosion()
@@ -64,6 +82,7 @@ func create_laser():
 	var l = laser.instance()
 	l.position = $cannon/laser_position.position
 	add_child(l)
+	return l
 
 func create_explosion():
 	var e = explosion.instance()
@@ -71,8 +90,14 @@ func create_explosion():
 	utils.main_node.add_child(e)
 
 func set_armor(new_value):
+	if new_value > 4: return
+	
 	if new_value < armor:
 		utils.main_node.add_child(flash.instance())
+	
+		if is_laser_updated:
+			is_laser_updated = false
+			laser_up = 1
 		
 	armor = new_value
 	emit_signal("armor_changed", armor)
@@ -80,6 +105,12 @@ func set_armor(new_value):
 	if armor <= 0:
 		create_explosion()
 		queue_free()
+
+func set_is_laser_updated(new_value):
+	if laser_up > 5: return
+	
+	is_laser_updated = true
+	laser_up += 1
 
 func process_animation():
 	if move.x != 0:

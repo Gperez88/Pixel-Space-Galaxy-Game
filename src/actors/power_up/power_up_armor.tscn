@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/actors/power_up/power_up.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/power_up/power_up_armor.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/power-up.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.35277
+
+[node name="Power_Armor" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+vframes = 2
+hframes = 2
+frame = 3
+
+[node name="animation" type="AnimationPlayer" parent="sprite" index="0"]
+anims/default = SubResource( 1 )
+
+[node name="collision" parent="." index="1"]
+shape = SubResource( 2 )
+[connection signal="area_entered" from="." to="." method="_on_Power_Armor_area_entered"]

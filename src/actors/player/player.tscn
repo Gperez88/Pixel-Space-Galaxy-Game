@@ -98,7 +98,7 @@ height = 2.22929
 [node name="Player" type="Area2D" groups=[
 "player",
 ]]
-collision_layer = 10
+collision_layer = 26
 script = ExtResource( 1 )
 velocity = 128
 

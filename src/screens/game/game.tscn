@@ -1,22 +1,23 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/screens/game/game.gd" type="Script" id=1]
 [ext_resource path="res://src/actors/cloud/cloud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/screens/game/camera.gd" type="Script" id=3]
 [ext_resource path="res://src/actors/background/background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actors/player/player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/actors/enemy/spawner_enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprites/armor.png" type="Texture" id=7]
-[ext_resource path="res://src/screens/game/armor_sprite.gd" type="Script" id=8]
-[ext_resource path="res://assets/sprites/score.png" type="Texture" id=9]
-[ext_resource path="res://src/screens/game/score_texture.gd" type="Script" id=10]
-[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://assets/sprites/button_normal.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/button_pressed.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/button_hover.png" type="Texture" id=14]
+[ext_resource path="res://src/actors/power_up/spawner_power_up.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actors/enemy/spawner_enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sprites/armor.png" type="Texture" id=8]
+[ext_resource path="res://src/screens/game/armor_sprite.gd" type="Script" id=9]
+[ext_resource path="res://assets/sprites/score.png" type="Texture" id=10]
+[ext_resource path="res://src/screens/game/score_texture.gd" type="Script" id=11]
+[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://assets/sprites/button_normal.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/button_pressed.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/button_hover.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 11 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends TextureButton
@@ -32,7 +33,7 @@ func _on_player_exit_tree():
 "
 
 [sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 11 )
+font_data = ExtResource( 12 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -52,27 +53,30 @@ position = Vector2( 135, 448 )
 [node name="player_position" type="Position2D" parent="."]
 position = Vector2( 135, 448 )
 
-[node name="Spawner_Enemy" parent="." instance=ExtResource( 6 )]
+[node name="Spawner_Power_Up" parent="." instance=ExtResource( 6 )]
+
+[node name="Spawner_Enemy" parent="." instance=ExtResource( 7 )]
 
 [node name="cloud_timer" type="Timer" parent="."]
 wait_time = 4.0
 
 [node name="hud" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="armor_sprite" type="Sprite" parent="hud"]
 position = Vector2( 32, 18 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 hframes = 5
 frame = 4
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="score_texture" type="TextureRect" parent="hud"]
 margin_left = 215.0
 margin_top = 8.0
 margin_right = 262.0
 margin_bottom = 28.0
-texture = ExtResource( 9 )
-script = ExtResource( 10 )
+texture = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="label" type="Label" parent="hud/score_texture"]
 margin_left = 3.0
@@ -93,9 +97,9 @@ margin_left = -23.5
 margin_top = -8.0
 margin_right = 23.5
 margin_bottom = 8.0
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 13 )
-texture_hover = ExtResource( 14 )
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 15 )
 script = SubResource( 2 )
 
 [node name="label" type="Label" parent="hud/menu_button"]
