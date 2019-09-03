@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 utils="*res://src/utils/utils.gd"
+audio_player="*res://src/utils/audio_player.tscn"
 
 [display]
 
@@ -31,6 +32,13 @@ window/size/test_width=540
 window/size/test_height=960
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
+
+[importer_defaults]
+
+ogg_vorbis={
+"loop": true,
+"loop_offset": 0
+}
 
 [layer_names]
 

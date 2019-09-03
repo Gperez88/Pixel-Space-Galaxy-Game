@@ -28,7 +28,12 @@ func create_explosion():
 	utils.main_node.add_child(e)
 
 func set_armor(new_value):
+	if is_queued_for_deletion(): return
+	
+	if new_value < armor: audio_player.player(audio_player.samplers.hit_enemy)
+	
 	armor = new_value
+	
 	if armor <= 0:
 		utils._find_node("score_texture").score += value
 		create_explosion()

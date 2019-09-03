@@ -8,8 +8,8 @@ position = Vector2( 128, -52 )
 script = ExtResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
-position = Vector2( 7, 0 )
-scale = Vector2( 1.05469, 1 )
+position = Vector2( 7.00001, 0 )
+scale = Vector2( 1.13281, 1 )
 texture = ExtResource( 2 )
 
 [node name="visibility_notifier" type="VisibilityNotifier2D" parent="."]

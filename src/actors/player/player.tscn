@@ -120,7 +120,7 @@ position = Vector2( 0, -3.61177 )
 shape = SubResource( 4 )
 
 [node name="laser_timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.2
 autostart = true
 
 [node name="drag_mouse_node" type="Node" parent="."]

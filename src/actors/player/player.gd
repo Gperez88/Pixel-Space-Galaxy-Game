@@ -94,6 +94,7 @@ func set_armor(new_value):
 	if new_value > 4: return
 	
 	if new_value < armor:
+		audio_player.player(audio_player.samplers.hit_ship)
 		utils.main_node.add_child(flash.instance())
 	
 		if is_laser_updated:
