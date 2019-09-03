@@ -1,33 +1,62 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/actors/enemy/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/enemy/clever_enemy.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/enemy-medium.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "body"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("body_sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body_sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10.5885, 5.16596 )
 
 [node name="Clever_Enemy" instance=ExtResource( 1 )]
 position = Vector2( 119.673, -8.02684 )
 script = ExtResource( 2 )
-velocity = Vector2( 2, 2 )
-
-[node name="sprite" parent="." index="0"]
-editor/display_folded = true
+velocity = Vector2( 1, 1 )
+armor = 2
 
 [node name="body_sprite" parent="sprite" index="0"]
 visible = true
 texture = ExtResource( 3 )
 hframes = 2
 
+[node name="animation" parent="sprite" index="1"]
+anims/body = SubResource( 1 )
+
 [node name="collision" parent="." index="1"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[node name="cannon" type="Node2D" parent="." index="4"]
+[node name="visibility_notifier" parent="." index="2"]
+position = Vector2( -7.15256e-07, 0.0537674 )
+scale = Vector2( 1.59145, 0.790306 )
 
-[node name="laser_position" type="Position2D" parent="cannon" index="0"]
-position = Vector2( 0, 8 )
-
-[node name="laser_timer" type="Timer" parent="." index="5"]
+[node name="laser_timer" type="Timer" parent="." index="3"]
 autostart = true
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

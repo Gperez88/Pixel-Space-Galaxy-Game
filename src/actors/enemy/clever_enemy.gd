@@ -3,6 +3,7 @@ extends "enemy.gd"
 const laser = preload("../laser/enemy_laser.tscn")
 
 func _ready():
+	$sprite/animation.current_animation = "body"
 	velocity.x = utils.choose([velocity.x, -velocity.x])
 
 func _process(delta):
@@ -16,10 +17,6 @@ func _on_laser_timer_timeout():
 	create_laser()
 
 func create_laser():
-	if current_status == ENEMY_STATUS.destroyed:
-		return
-	
 	var l = laser.instance()
-	add_child(l)
-	
-	l.position = $cannon/laser_position.position
+	l.position = position
+	utils.main_node.add_child(l)

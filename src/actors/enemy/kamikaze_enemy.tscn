@@ -5,10 +5,10 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "body"
-length = 0.4
+length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("explosion_sprite:visible")
+tracks/0/path = NodePath("body_sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -17,28 +17,16 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("body_sprite:visible")
+tracks/1/path = NodePath("body_sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("body_sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
@@ -48,7 +36,7 @@ tracks/2/keys = {
 extents = Vector2( 5.79337, 5.24457 )
 
 [node name="Kamikaze_Enemy" instance=ExtResource( 1 )]
-velocity = Vector2( 0, 4 )
+velocity = Vector2( 0, 2 )
 
 [node name="body_sprite" parent="sprite" index="0"]
 visible = true
@@ -56,11 +44,12 @@ texture = ExtResource( 2 )
 hframes = 2
 frame = 1
 
-[node name="explosion_sprite" parent="sprite" index="1"]
-frame = 4
-
-[node name="animation" parent="sprite" index="2"]
+[node name="animation" parent="sprite" index="1"]
 anims/body = SubResource( 1 )
 
 [node name="collision" parent="." index="1"]
 shape = SubResource( 2 )
+
+[node name="visibility_notifier" parent="." index="2"]
+position = Vector2( 0.117913, 1.19209e-07 )
+scale = Vector2( 0.882087, 0.799548 )

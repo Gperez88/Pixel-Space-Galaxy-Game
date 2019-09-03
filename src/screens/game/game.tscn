@@ -1,25 +1,31 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/screens/game/game.gd" type="Script" id=1]
 [ext_resource path="res://src/actors/cloud/cloud.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/actors/background/background.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actors/player/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actors/enemy/spawner_enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/screens/game/camera.gd" type="Script" id=3]
+[ext_resource path="res://src/actors/background/background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actors/enemy/spawner_enemy.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 cloud = ExtResource( 2 )
 
-[node name="background" parent="." instance=ExtResource( 3 )]
+[node name="camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 3 )
+
+[node name="background" parent="." instance=ExtResource( 4 )]
 z_index = -1
 
-[node name="player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 127.697, 576.805 )
+[node name="player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 135, 448 )
 
 [node name="player_position" type="Position2D" parent="."]
-position = Vector2( 128, 576 )
+position = Vector2( 135, 448 )
 
-[node name="Spawner_Enemy" parent="." instance=ExtResource( 5 )]
+[node name="Spawner_Enemy" parent="." instance=ExtResource( 6 )]
 
 [node name="cloud_timer" type="Timer" parent="."]
 wait_time = 4.0

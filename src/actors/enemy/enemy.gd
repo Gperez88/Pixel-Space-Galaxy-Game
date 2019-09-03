@@ -1,11 +1,15 @@
 extends Area2D
 
+const explosion = preload("../explosion/explosion.tscn")
+
 signal destroyed
 
-enum ENEMY_STATUS {destroyed, alive}
-
 export var velocity = Vector2()
-var current_status = ENEMY_STATUS.alive
+
+export var armor = 1 setget set_armor
+
+func _ready():
+	$sprite/animation.current_animation = "body"
 
 func _process(delta):
 	translate(velocity)
@@ -14,7 +18,16 @@ func _on_visibility_notifier_screen_exited():
 	queue_free()
 
 func _on_Enemy_destroyed():
-	current_status = ENEMY_STATUS.destroyed
-	$sprite/animation.current_animation = "explosion"
-	$explosion_particle.emitting = true
-	$collision.call_deferred("set", "disabled", true)
+	create_explosion()
+	queue_free()
+
+func create_explosion():
+	var e = explosion.instance()
+	e.position = position
+	utils.main_node.add_child(e)
+
+func set_armor(new_value):
+	armor = new_value
+	if armor <= 0:
+		create_explosion()
+		queue_free()

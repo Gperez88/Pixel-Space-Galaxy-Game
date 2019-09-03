@@ -33,7 +33,7 @@ tracks/1/keys = {
 "values": [ 2, 7 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.3
 loop = true
 step = 0.05
@@ -62,7 +62,7 @@ tracks/1/keys = {
 "values": [ 1, 6 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.3
 loop = true
 step = 0.05
@@ -91,15 +91,19 @@ tracks/1/keys = {
 "values": [ 3, 8 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 6.80876
 height = 2.22929
 
 [node name="Player" type="Area2D" groups=[
 "player",
 ]]
+position = Vector2( 108.712, 198.943 )
 collision_layer = 10
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 velocity = 128
 
 [node name="sprite" type="Sprite" parent="."]
@@ -112,12 +116,12 @@ frame = 7
 
 [node name="animation" type="AnimationPlayer" parent="sprite"]
 anims/default = SubResource( 1 )
-anims/left = SubResource( 2 )
-anims/right = SubResource( 3 )
+anims/left = SubResource( 3 )
+anims/right = SubResource( 4 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3.61177 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="laser_timer" type="Timer" parent="."]
 wait_time = 0.3
@@ -126,7 +130,6 @@ autostart = true
 [node name="drag_mouse_node" type="Node" parent="."]
 
 [node name="cannon" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="laser_position" type="Position2D" parent="cannon"]
 position = Vector2( 0, -12 )

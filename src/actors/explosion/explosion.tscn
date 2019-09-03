@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/explosion.png" type="Texture" id=1]
+[ext_resource path="res://src/actors/explosion/explosion.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/smoke.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/flare.png" type="Texture" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+angular_velocity = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.2
+scale_random = 0.1
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_out"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4 ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[node name="Explosion" type="Sprite"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( 150, 60 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+hframes = 5
+frame = 4
+script = ExtResource( 2 )
+
+[node name="smoke_particle" type="Particles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+show_behind_parent = true
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="flare_particle" type="Particles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/fade_out = SubResource( 2 )

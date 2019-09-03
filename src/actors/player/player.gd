@@ -1,14 +1,13 @@
 extends Area2D
 
-const Enemy = preload('../enemy/enemy.gd')
 const laser = preload("../laser/player_laser.tscn")
+const explosion = preload("../explosion/explosion.tscn")
+const flash = preload("../flash/flash.tscn")
 
 signal destroyed
 export (int) var velocity
 
-enum PLAYER_STATUS {destroyed, alive}
-
-var current_status = PLAYER_STATUS.alive
+var armor = 4 setget set_armor
 var move = Vector2()
 var bound
 
@@ -48,19 +47,12 @@ func _on_laser_timer_timeout():
 	create_laser()
 
 func _on_Player_destroyed():
-	current_status = PLAYER_STATUS.destroyed
-	$sprite/animation.current_animation = "explosion"
-	$explosion_particle.emitting = true
-	$collision.call_deferred("set", "disabled", true)
-
-func _on_animation_animation_finished(anim_name):
-	if anim_name == "explosion":
-		queue_free()
+	create_explosion()
+	queue_free()
 
 func _on_Player_area_entered(area):
-	if area is Enemy:
-		area.emit_signal("destroyed")
-		emit_signal("destroyed")
+	if area.is_in_group("enemy"):
+		armor -= 1
 
 func start(pos):
 	show()
@@ -68,18 +60,25 @@ func start(pos):
 	$collision.call_deferred("set", "disabled", false)
 
 func create_laser():
-	if current_status == PLAYER_STATUS.destroyed:
-		return
-	
 	var l = laser.instance()
-	add_child(l)
-	
 	l.position = $cannon/laser_position.position
+	add_child(l)
+
+func create_explosion():
+	var e = explosion.instance()
+	e.position = position
+	utils.main_node.add_child(e)
+
+func set_armor(new_value):
+	if new_value < armor:
+		utils.main_node.add_child(flash.instance())
+		
+	armor = new_value
+	if armor <= 0:
+		create_explosion()
+		queue_free()
 
 func process_animation():
-	if current_status == PLAYER_STATUS.destroyed:
-		return
-	
 	if move.x != 0:
 		if move.x < 0:
 			$sprite/animation.current_animation = "left"

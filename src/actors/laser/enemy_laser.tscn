@@ -4,6 +4,7 @@
 [ext_resource path="res://src/actors/laser/enemy_laser.gd" type="Script" id=2]
 
 [node name="Enemy_Laser" instance=ExtResource( 1 )]
+collision_mask = 8
 script = ExtResource( 2 )
 velocity = Vector2( 0, 100 )
 
