@@ -4,6 +4,7 @@ const laser = preload("../laser/player_laser.tscn")
 const explosion = preload("../explosion/explosion.tscn")
 const flash = preload("../flash/flash.tscn")
 
+signal armor_changed
 signal destroyed
 export (int) var velocity
 
@@ -74,6 +75,8 @@ func set_armor(new_value):
 		utils.main_node.add_child(flash.instance())
 		
 	armor = new_value
+	emit_signal("armor_changed", armor)
+	
 	if armor <= 0:
 		create_explosion()
 		queue_free()

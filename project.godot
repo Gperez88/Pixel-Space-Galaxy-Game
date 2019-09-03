@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pixel-Space-Galaxy-Game"
-run/main_scene="res://src/screens/game/game.tscn"
+run/main_scene="res://src/screens/menu/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

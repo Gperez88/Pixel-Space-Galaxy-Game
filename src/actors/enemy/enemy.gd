@@ -7,6 +7,7 @@ signal destroyed
 export var velocity = Vector2()
 
 export var armor = 1 setget set_armor
+export var value = 5
 
 func _ready():
 	$sprite/animation.current_animation = "body"
@@ -29,5 +30,6 @@ func create_explosion():
 func set_armor(new_value):
 	armor = new_value
 	if armor <= 0:
+		utils._find_node("score_texture").score += value
 		create_explosion()
 		queue_free()
