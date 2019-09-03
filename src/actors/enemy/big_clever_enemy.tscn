@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/actors/enemy/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/enemy/big_clever_enemy.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/enemy-big.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "body"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("body_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="Big_Clever_Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+velocity = Vector2( 1, 0.25 )
+armor = 4
+value = 15
+
+[node name="body_sprite" parent="sprite" index="1"]
+visible = true
+texture = ExtResource( 3 )
+hframes = 2
+frame = 1
+
+[node name="animation" parent="sprite" index="2"]
+anims/body = SubResource( 1 )
+
+[node name="collision" parent="." index="1"]
+position = Vector2( 0, 3.99834 )
+
+[node name="visibility_notifier" parent="." index="2"]
+position = Vector2( 3.8147e-06, 3.99834 )
+scale = Vector2( 1.2399, 1.2399 )
+
+[node name="laser_timer" type="Timer" parent="." index="3"]
+wait_time = 3.0
+autostart = true
+[connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

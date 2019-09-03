@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/rectangle.png" type="Texture" id=1]
+[ext_resource path="res://src/actors/flash/flash.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_out"
+length = 0.3
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.15 )
+}
+
+[node name="Flash" type="Sprite"]
+modulate = Color( 1, 0, 0, 0 )
+position = Vector2( 135.271, 241.24 )
+scale = Vector2( 9.45446, 16.0775 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/fade_out = SubResource( 1 )

@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/actors/player/player.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/ship.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ship:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ship:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 7 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ship:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ship:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 6 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ship:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ship:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 8 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 6.80876
+height = 2.22929
+
+[node name="Player" type="Area2D" groups=[
+"player",
+]]
+collision_layer = 10
+script = ExtResource( 1 )
+velocity = 128
+
+[node name="sprite" type="Sprite" parent="."]
+
+[node name="ship" type="Sprite" parent="sprite"]
+texture = ExtResource( 2 )
+vframes = 2
+hframes = 5
+frame = 7
+
+[node name="animation" type="AnimationPlayer" parent="sprite"]
+anims/default = SubResource( 1 )
+anims/left = SubResource( 2 )
+anims/right = SubResource( 3 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -3.61177 )
+shape = SubResource( 4 )
+
+[node name="laser_timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="drag_mouse_node" type="Node" parent="."]
+
+[node name="cannon" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="laser_position" type="Position2D" parent="cannon"]
+position = Vector2( 0, -12 )
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="destroyed" from="." to="." method="_on_Player_destroyed"]
+[connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

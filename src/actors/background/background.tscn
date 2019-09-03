@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/background/background.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/backgorund-looped.png" type="Texture" id=2]
+
+[node name="Background" type="Node2D"]
+position = Vector2( 128, 0 )
+script = ExtResource( 1 )
+
+[node name="background_sprite_one" type="Sprite" parent="."]
+position = Vector2( 7, 240 )
+scale = Vector2( 1.13281, 0.789474 )
+texture = ExtResource( 2 )
+
+[node name="background_sprite_two" type="Sprite" parent="."]
+position = Vector2( 6.51437, -240 )
+scale = Vector2( 1.13661, 0.789474 )
+texture = ExtResource( 2 )
