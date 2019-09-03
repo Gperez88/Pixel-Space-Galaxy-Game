@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/actors/player/player.gd" type="Script" id=1]
-[ext_resource path="res://src/actors/player/laser/laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actors/laser/laser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/ship.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/explosion.png" type="Texture" id=4]
 
@@ -187,7 +187,7 @@ spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 100.0
 initial_velocity_random = 0.5
-angular_velocity = 0.0
+angular_velocity = 0.173529
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 100.0
@@ -206,15 +206,16 @@ velocity = 128
 laser = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
+editor/display_folded = true
 
 [node name="ship" type="Sprite" parent="sprite"]
-visible = false
 texture = ExtResource( 3 )
 vframes = 2
 hframes = 5
 frame = 3
 
 [node name="explosion" type="Sprite" parent="sprite"]
+visible = false
 texture = ExtResource( 4 )
 hframes = 5
 frame = 1
@@ -226,7 +227,6 @@ anims/left = SubResource( 3 )
 anims/right = SubResource( 4 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -3.61177 )
 shape = SubResource( 5 )
 
@@ -241,6 +241,7 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.5
 process_material = SubResource( 8 )
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="destroyed" from="." to="." method="_on_Player_destroyed"]
 [connection signal="input_event" from="." to="." method="_on_Player_input_event"]
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

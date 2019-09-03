@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/actors/enemy/enemy.gd" type="Script" id=1]
-[ext_resource path="res://src/actors/enemy/laser/laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actors/laser/laser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/enemy-small.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/enemy-medium.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/enemy-big.png" type="Texture" id=5]
@@ -294,15 +294,14 @@ scale_random = 0.5
 color_ramp = SubResource( 7 )
 
 [node name="Enemy" type="RigidBody2D"]
-collision_layer = 0
+collision_layer = 5
+collision_mask = 5
 gravity_scale = 0.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 laser = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
+editor/display_folded = true
 
 [node name="small_sprite" type="Sprite" parent="sprite"]
 visible = false
@@ -350,6 +349,5 @@ process_material = SubResource( 8 )
 [node name="laser_timer" type="Timer" parent="."]
 autostart = true
 [connection signal="destroyed" from="." to="." method="_on_Enemy_destroyed"]
-[connection signal="animation_finished" from="sprite/animation" to="." method="_on_animation_animation_finished"]
 [connection signal="screen_exited" from="visibility_notifier" to="." method="_on_visibility_notifier_screen_exited"]
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

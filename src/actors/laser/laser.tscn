@@ -1,13 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/actors/enemy/laser/laser.gd" type="Script" id=1]
+[ext_resource path="res://src/actors/laser/laser.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/laser-bolts.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "default"
-length = 0.3
+resource_name = "enemy_laser"
+length = 0.2
 loop = true
-step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -15,32 +14,52 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 2.65853
+[sub_resource type="Animation" id=2]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 2 ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 2.81375
 
 [node name="Laser" type="Area2D"]
-collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 2, 0 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 2
 
 [node name="animation" type="AnimationPlayer" parent="sprite"]
-anims/default = SubResource( 1 )
-
-[node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2( -0.480282, 2.5615 )
-shape = SubResource( 2 )
+anims/enemy_laser = SubResource( 1 )
+anims/player_laser = SubResource( 2 )
 
 [node name="visibility_notifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 1.87475, -0.234343 )
+scale = Vector2( 0.885172, 0.899232 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( 1.5, -2.5 )
+shape = SubResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_Laser_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Laser_body_entered"]
 [connection signal="screen_exited" from="visibility_notifier" to="." method="_on_visibility_notifier_screen_exited"]

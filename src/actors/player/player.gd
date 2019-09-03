@@ -1,5 +1,7 @@
 extends Area2D
 
+var Enemy = preload('../enemy/enemy.gd')
+
 signal destroyed
 export (int) var velocity
 export (PackedScene) var laser
@@ -13,6 +15,7 @@ var bound
 func _ready():
 	hide()
 	bound = get_viewport_rect().size
+
 
 func _process(delta):
 	move = Vector2() #reset move
@@ -59,7 +62,13 @@ func start(pos):
 
 
 func create_laser():
+	if current_status == PLAYER_STATUS.destroyed:
+		return
+	
 	var l = laser.instance()
+	l.reference = self
+	l.velocity = 10
+	l.type = 1
 	add_child(l)
 	
 	var laser_begin_position = Vector2($sprite.position.x-2, $sprite.position.y-6)
@@ -77,3 +86,9 @@ func process_animation():
 			$sprite/animation.current_animation = "right"
 	else:
 		$sprite/animation.current_animation = "default"
+
+
+func _on_Player_body_entered(body):
+	if body is Enemy:
+		body.emit_signal("destroyed")
+		emit_signal("destroyed")

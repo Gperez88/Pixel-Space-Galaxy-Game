@@ -3,6 +3,9 @@ extends RigidBody2D
 signal destroyed
 export (PackedScene) var laser
 
+enum ENEMY_STATUS {destroyed, alive}
+
+var current_status = ENEMY_STATUS.alive
 var type = 1
 
 func _ready():
@@ -30,13 +33,10 @@ func _on_visibility_notifier_screen_exited():
 
 
 func _on_Enemy_destroyed():
+	current_status = ENEMY_STATUS.destroyed
 	$sprite/animation.current_animation = "explosion"
 	$explosion_particle.emitting = true
-
-
-func _on_animation_animation_finished(anim_name):
-	if anim_name == "explosion":
-		queue_free()
+	$collision.call_deferred("set", "disabled", true)
 
 
 func _on_laser_timer_timeout():
@@ -44,7 +44,13 @@ func _on_laser_timer_timeout():
 
 
 func create_laser():
+	if current_status == ENEMY_STATUS.destroyed:
+		return
+	
 	var l = laser.instance()
+	l.reference = self
+	l.velocity = -2
+	l.type = 2
 	add_child(l)
 	
 	var laser_begin_position = Vector2($sprite.position.x-2, $sprite.position.y-6)
