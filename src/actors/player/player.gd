@@ -72,7 +72,8 @@ func _on_Player_destroyed():
 
 func _on_Player_area_entered(area):
 	if area.is_in_group("enemy"):
-		armor -= 1
+		self.armor -= 1
+		utils.remote_call("camera", "shake", 3, 0.13)
 
 func start(pos):
 	show()

@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 utils="*res://src/utils/utils.gd"
 audio_player="*res://src/utils/audio_player.tscn"
+store="*res://src/utils/store.gd"
 
 [display]
 

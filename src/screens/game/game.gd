@@ -19,5 +19,3 @@ func new_game():
 	$player.set_process_input(true)
 	$cloud_timer.start()
 
-
-
