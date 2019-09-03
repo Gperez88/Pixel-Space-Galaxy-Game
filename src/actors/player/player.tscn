@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/actors/player/player.gd" type="Script" id=1]
-[ext_resource path="res://src/actors/laser/laser.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/sprites/ship.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/explosion.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/ship.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/explosion.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -203,20 +202,19 @@ __meta__ = {
 "_edit_group_": true
 }
 velocity = 128
-laser = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
 editor/display_folded = true
 
 [node name="ship" type="Sprite" parent="sprite"]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 vframes = 2
 hframes = 5
-frame = 3
+frame = 7
 
 [node name="explosion" type="Sprite" parent="sprite"]
 visible = false
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 hframes = 5
 frame = 1
 
@@ -231,7 +229,7 @@ position = Vector2( 0, -3.61177 )
 shape = SubResource( 5 )
 
 [node name="laser_timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 autostart = true
 
 [node name="explosion_particle" type="Particles2D" parent="."]
@@ -241,7 +239,13 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.5
 process_material = SubResource( 8 )
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+
+[node name="drag_mouse_node" type="Node" parent="."]
+
+[node name="cannon" type="Node2D" parent="."]
+
+[node name="laser_position" type="Position2D" parent="cannon"]
+position = Vector2( 0, -12 )
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
 [connection signal="destroyed" from="." to="." method="_on_Player_destroyed"]
-[connection signal="input_event" from="." to="." method="_on_Player_input_event"]
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

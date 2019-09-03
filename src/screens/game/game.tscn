@@ -1,39 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/screens/game/game.gd" type="Script" id=1]
 [ext_resource path="res://src/actors/cloud/cloud.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/actors/enemy/enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actors/background/background.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actors/player/player.tscn" type="PackedScene" id=5]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255.733, 0.375076 )
-}
+[ext_resource path="res://src/actors/background/background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actors/player/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actors/enemy/spawner_enemy.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 cloud = ExtResource( 2 )
-enemy = ExtResource( 3 )
 
-[node name="background" parent="." instance=ExtResource( 4 )]
+[node name="background" parent="." instance=ExtResource( 3 )]
 z_index = -1
 
-[node name="player" parent="." instance=ExtResource( 5 )]
+[node name="player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 127.697, 576.805 )
 
 [node name="player_position" type="Position2D" parent="."]
 position = Vector2( 128, 576 )
 
-[node name="enemy_path" type="Path2D" parent="."]
-editor/display_folded = true
-curve = SubResource( 1 )
-
-[node name="enemy_path_follow" type="PathFollow2D" parent="enemy_path"]
-rotation = 0.00146667
+[node name="Spawner_Enemy" parent="." instance=ExtResource( 5 )]
 
 [node name="cloud_timer" type="Timer" parent="."]
 wait_time = 4.0
-
-[node name="enemy_timer" type="Timer" parent="."]
 [connection signal="timeout" from="cloud_timer" to="." method="_on_cloud_timer_timeout"]
-[connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]

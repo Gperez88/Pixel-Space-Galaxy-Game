@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/laser/laser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/laser/enemy_laser.gd" type="Script" id=2]
+
+[node name="Enemy_Laser" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+velocity = Vector2( 0, 100 )
+
+[node name="sprite" parent="." index="0"]
+frame = 0
+
+[node name="visibility_notifier" parent="." index="1"]
+position = Vector2( 1.5, 2.5 )
+scale = Vector2( 0.28, 0.28 )
+
+[node name="collision" parent="." index="2"]
+position = Vector2( 1.5, 2.5 )
+[connection signal="area_entered" from="." to="." method="_on_Enemy_Laser_area_entered"]

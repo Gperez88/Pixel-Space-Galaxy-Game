@@ -1,10 +1,10 @@
 extends Area2D
 
-var Enemy = preload('../enemy/enemy.gd')
+const Enemy = preload('../enemy/enemy.gd')
+const laser = preload("../laser/player_laser.tscn")
 
 signal destroyed
 export (int) var velocity
-export (PackedScene) var laser
 
 enum PLAYER_STATUS {destroyed, alive}
 
@@ -15,7 +15,6 @@ var bound
 func _ready():
 	hide()
 	bound = get_viewport_rect().size
-
 
 func _process(delta):
 	move = Vector2() #reset move
@@ -28,7 +27,7 @@ func _process(delta):
 		move.y -= 1
 	if Input.is_action_pressed("ui_down"): #move down
 		move.y += 1
-	
+		
 	if move.length() > 0: #verify is moving
 		move = move.normalized() * velocity #normalized velocity
 		
@@ -38,10 +37,15 @@ func _process(delta):
 	
 	process_animation()
 
+func _input(event):
+	if event is InputEventScreenDrag:
+		move += event.relative
+		
+		position += move
+		process_animation()
 
 func _on_laser_timer_timeout():
 	create_laser()
-
 
 func _on_Player_destroyed():
 	current_status = PLAYER_STATUS.destroyed
@@ -49,31 +53,28 @@ func _on_Player_destroyed():
 	$explosion_particle.emitting = true
 	$collision.call_deferred("set", "disabled", true)
 
-
 func _on_animation_animation_finished(anim_name):
 	if anim_name == "explosion":
 		queue_free()
 
+func _on_Player_area_entered(area):
+	if area is Enemy:
+		area.emit_signal("destroyed")
+		emit_signal("destroyed")
 
 func start(pos):
 	show()
 	position = pos
 	$collision.call_deferred("set", "disabled", false)
 
-
 func create_laser():
 	if current_status == PLAYER_STATUS.destroyed:
 		return
 	
 	var l = laser.instance()
-	l.reference = self
-	l.velocity = 10
-	l.type = 1
 	add_child(l)
 	
-	var laser_begin_position = Vector2($sprite.position.x-2, $sprite.position.y-6)
-	l.position = laser_begin_position
-
+	l.position = $cannon/laser_position.position
 
 func process_animation():
 	if current_status == PLAYER_STATUS.destroyed:
@@ -86,9 +87,3 @@ func process_animation():
 			$sprite/animation.current_animation = "right"
 	else:
 		$sprite/animation.current_animation = "default"
-
-
-func _on_Player_body_entered(body):
-	if body is Enemy:
-		body.emit_signal("destroyed")
-		emit_signal("destroyed")
