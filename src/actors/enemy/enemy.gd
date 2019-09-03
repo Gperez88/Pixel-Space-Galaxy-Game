@@ -3,7 +3,6 @@ extends Area2D
 const explosion = preload("../explosion/explosion.tscn")
 
 signal destroyed
-
 export var velocity = Vector2()
 
 export var armor = 1 setget set_armor
@@ -33,7 +32,8 @@ func set_armor(new_value):
 	if new_value < armor: audio_player.player(audio_player.samplers.hit_enemy)
 	
 	armor = new_value
-	
+	$sprite/armor_sprite.frame = armor
+		
 	if armor <= 0:
 		utils._find_node("score_texture").score += value
 		create_explosion()

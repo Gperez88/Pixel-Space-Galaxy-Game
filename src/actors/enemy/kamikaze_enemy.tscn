@@ -35,16 +35,19 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.79337, 5.24457 )
 
-[node name="Kamikaze_Enemy" index="0" instance=ExtResource( 1 )]
-velocity = Vector2( 0, 2 )
+[node name="Kamikaze_Enemy" instance=ExtResource( 1 )]
+velocity = Vector2( 0, 4 )
 
-[node name="body_sprite" parent="sprite" index="0"]
+[node name="armor_sprite" parent="sprite" index="0"]
+visible = false
+
+[node name="body_sprite" parent="sprite" index="1"]
 visible = true
 texture = ExtResource( 2 )
 hframes = 2
 frame = 1
 
-[node name="animation" parent="sprite" index="1"]
+[node name="animation" parent="sprite" index="2"]
 anims/body = SubResource( 1 )
 
 [node name="collision" parent="." index="1"]

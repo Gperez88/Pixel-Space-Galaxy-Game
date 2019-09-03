@@ -2,6 +2,7 @@ extends Node
 
 const enemies = [
 	preload("res://src/actors/enemy/kamikaze_enemy.tscn"),
+	preload("res://src/actors/enemy/kamikaze_follower_enemy.tscn"),
 	preload("res://src/actors/enemy/clever_enemy.tscn"),
 	preload("res://src/actors/enemy/big_clever_enemy.tscn")
 ]

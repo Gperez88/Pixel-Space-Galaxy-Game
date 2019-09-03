@@ -4,7 +4,7 @@
 [ext_resource path="res://src/actors/enemy/clever_enemy.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/enemy-medium.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "body"
 length = 0.2
 loop = true
@@ -39,17 +39,19 @@ extents = Vector2( 10.5885, 5.16596 )
 [node name="Clever_Enemy" instance=ExtResource( 1 )]
 position = Vector2( 119.673, -8.02684 )
 script = ExtResource( 2 )
-velocity = Vector2( 1, 1 )
-armor = 2
+velocity = Vector2( 2, 2 )
 value = 10
 
-[node name="body_sprite" parent="sprite" index="0"]
+[node name="armor_sprite" parent="sprite" index="0"]
+visible = false
+
+[node name="body_sprite" parent="sprite" index="1"]
 visible = true
 texture = ExtResource( 3 )
 hframes = 2
 
-[node name="animation" parent="sprite" index="1"]
-anims/body = SubResource( 3 )
+[node name="animation" parent="sprite" index="2"]
+anims/body = SubResource( 1 )
 
 [node name="collision" parent="." index="1"]
 shape = SubResource( 2 )
@@ -59,6 +61,5 @@ position = Vector2( -7.15256e-07, 0.0537674 )
 scale = Vector2( 1.59145, 0.790306 )
 
 [node name="laser_timer" type="Timer" parent="." index="3"]
-wait_time = 2.0
 autostart = true
 [connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

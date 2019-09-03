@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actors/enemy/kamikaze_enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actors/enemy/kamikaze_follower_enemy.gd" type="Script" id=2]
+
+[node name="Kamikaze_Follower_Enemy" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+velocity = Vector2( 0, 6 )

@@ -7,4 +7,4 @@
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
 script = ExtResource( 2 )
-velocity = Vector2( 0, 50 )
+velocity = Vector2( 0, 80 )
