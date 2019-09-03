@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sprites/enemy-big.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
-resource_name = "default"
+resource_name = "body"
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -23,6 +23,9 @@ tracks/0/keys = {
 
 [node name="Big_Clever_Enemy" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+velocity = Vector2( 1, 0.25 )
+armor = 4
+value = 15
 
 [node name="body_sprite" parent="sprite" index="0"]
 visible = true
@@ -31,7 +34,7 @@ hframes = 2
 frame = 1
 
 [node name="animation" parent="sprite" index="1"]
-anims/default = SubResource( 1 )
+anims/body = SubResource( 1 )
 
 [node name="collision" parent="." index="1"]
 position = Vector2( 0, 3.99834 )
@@ -39,3 +42,8 @@ position = Vector2( 0, 3.99834 )
 [node name="visibility_notifier" parent="." index="2"]
 position = Vector2( 3.8147e-06, 3.99834 )
 scale = Vector2( 1.2399, 1.2399 )
+
+[node name="laser_timer" type="Timer" parent="." index="3"]
+wait_time = 4.0
+autostart = true
+[connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]

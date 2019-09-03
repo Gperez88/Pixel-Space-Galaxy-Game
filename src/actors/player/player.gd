@@ -49,8 +49,9 @@ func _input(event):
 func _on_laser_timer_timeout():
 	var x = 10
 	
-	for count in laser_up-1:
+	for count in laser_up:
 		var laser = create_laser()
+		
 		match(count):
 			0:
 				x = 0
@@ -107,7 +108,7 @@ func set_armor(new_value):
 		queue_free()
 
 func set_is_laser_updated(new_value):
-	if laser_up > 5: return
+	if laser_up > 4: return
 	
 	is_laser_updated = true
 	laser_up += 1

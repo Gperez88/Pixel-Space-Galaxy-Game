@@ -3,6 +3,7 @@
 [ext_resource path="res://src/actors/enemy/enemy.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.37109, 8.29205 )
 
 [node name="Enemy" type="Area2D" groups=[
 "enemy",
